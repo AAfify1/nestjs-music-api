@@ -8,8 +8,6 @@ The API was implemented using NestJS, and supported by a MongoDB hosted on Atlas
 Otherwise you can create and connect a local MongoDB instead.
 
 All the required endpoints have been implemented and protected behind JWT authentication.
-To generate a JWT you need to first hit the endpoint `http://localhost:3000/auth/login` with a POST request
-
 
 
 ## Installation
