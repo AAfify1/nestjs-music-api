@@ -8,13 +8,16 @@ import {
   Post,
   Put,
   Res,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateTrackDto } from 'src/track/create-track.dto';
 import { UpdateTrackDto } from 'src/track/update-track.dto';
 import { TrackService } from 'src/track/track.service';
+import { AuthGuard } from '@nestjs/passport';
 @Controller('track')
 export class TrackController {
   constructor(private readonly trackService: TrackService) {}
+  @UseGuards(AuthGuard('jwt'))
   @Post()
   async createTrack(@Res() response, @Body() createTrackDto: CreateTrackDto) {
     try {
@@ -31,6 +34,7 @@ export class TrackController {
       });
     }
   }
+  @UseGuards(AuthGuard('jwt'))
   @Put('/:id')
   async updateTrack(
     @Res() response,
@@ -50,6 +54,7 @@ export class TrackController {
       return response.status(err.status).json(err.response);
     }
   }
+  @UseGuards(AuthGuard('jwt'))
   @Get()
   async getTracks(@Res() response) {
     try {
@@ -62,6 +67,7 @@ export class TrackController {
       return response.status(err.status).json(err.response);
     }
   }
+  @UseGuards(AuthGuard('jwt'))
   @Get('/:id')
   async getTrack(@Res() response, @Param('id') trackId: string) {
     try {
@@ -74,6 +80,7 @@ export class TrackController {
       return response.status(err.status).json(err.response);
     }
   }
+  @UseGuards(AuthGuard('jwt'))
   @Delete('/:id')
   async deleteTrack(@Res() response, @Param('id') trackId: string) {
     try {

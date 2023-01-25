@@ -18,6 +18,7 @@ import { AuthGuard } from '@nestjs/passport';
 @Controller('playlist')
 export class PlaylistController {
   constructor(private readonly playlistService: PlaylistService) {}
+  @UseGuards(AuthGuard('jwt'))
   @Post()
   async createPlaylist(
     @Res() response,
@@ -39,6 +40,7 @@ export class PlaylistController {
       });
     }
   }
+  @UseGuards(AuthGuard('jwt'))
   @Put('/:id')
   async updatePlaylist(
     @Res() response,
@@ -58,6 +60,7 @@ export class PlaylistController {
       return response.status(err.status).json(err.response);
     }
   }
+  @UseGuards(AuthGuard('jwt'))
   @Put('/:id/addTrack')
   async addTrack(
     @Res() response,
@@ -77,6 +80,7 @@ export class PlaylistController {
       return response.status(err.status).json(err.response);
     }
   }
+  @UseGuards(AuthGuard('jwt'))
   @Put('/:id/removeTrack')
   async removeTrack(
     @Res() response,
@@ -111,6 +115,7 @@ export class PlaylistController {
       return response.status(err.status).json(err.response);
     }
   }
+  @UseGuards(AuthGuard('jwt'))
   @Get('/:id')
   async getPlaylist(@Res() response, @Param('id') playlistId: string) {
     try {
@@ -125,6 +130,7 @@ export class PlaylistController {
       return response.status(err.status).json(err.response);
     }
   }
+  @UseGuards(AuthGuard('jwt'))
   @Delete('/:id')
   async deletePlaylist(@Res() response, @Param('id') playlistId: string) {
     try {
